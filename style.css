@@ -1,0 +1,63 @@
+html, body {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background-color: #111;
+	font-family: sans-serif;
+}
+
+#timelines {
+	overflow: auto;
+	width: 100%;
+	margin: 20px;
+	border-radius: 4px;
+	background-color: #283440;
+}
+
+.serie {
+	position: relative;
+	height: 40px;
+	margin-top: 2px;
+	box-sizing: border-box;
+	line-height: 40px;
+}
+
+.serie:hover .title {
+	opacity: 0;
+}
+
+.title {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	background-color: rgba( 255, 255, 255, .2 );
+	transition: opacity .3s;
+	color: #ddd;
+	text-shadow: 1px 1px 0 #555;
+}
+
+.season {
+	position: absolute;
+	height: 100%;
+	background: rgba( 255, 255, 255, .12 );
+	min-width: 20px;
+	border-radius: 4px;
+	border-left: 10px solid #2980b9;
+	box-sizing: border-box;
+}
+
+.serie:nth-child( 1 ) .season {
+	border-left: 10px solid #9b59b6;
+}
+.serie:nth-child( 2 ) .season {
+	border-left: 10px solid #f39c12;
+}
+.serie:nth-child( 3 ) .season {
+	border-left: 10px solid #c0392b;
+}
+.serie:nth-child( 4 ) .season {
+	border-left: 10px solid #27ae60;
+}
