@@ -1,34 +1,42 @@
-const elTimelines = document.getElementById( "timelines" );
+function createSeason( timeline ) {
+	const pxPerMonth = timeline.pxPerMonth(),
+		pxPerWeek = pxPerMonth * 12 / 52;
 
-let minYear = 2005,
-	maxYear = 2020;
+	timeline.rootElement.innerHTML = "";
+	Object.entries( series ).forEach( function( serie ) {
+		const elTitle = document.createElement( "div" ),
+			elSerie = document.createElement( "div" );
 
-/* get timestamp */
-function t( date ) {
-	return ( new Date( date.toString() ).getTime() );
+		elTitle.classList.add( "title" );
+		elTitle.innerHTML = serie[ 0 ];
+
+		serie[ 1 ].seasons.forEach( function( s ) {
+			const elSeason = document.createElement( "div" ),
+				sMonth = timeline.monthsBetween( minYear, s.firstAired );
+
+			elSeason.classList.add( "season" );
+			elSeason.style.width = pxPerWeek * s.nbEpisodes + "px";
+			elSeason.style.left = sMonth * pxPerMonth + "px";
+			elSerie.appendChild( elSeason );
+			elSerie.appendChild( elTitle );
+		});
+
+		elSerie.classList.add( "serie" );
+		timeline.rootElement.appendChild( elSerie );
+	});
 }
 
-const timeDuration = ( t( maxYear ) - t( minYear ) );
+window.onresize = function() {
+	timeline.resize.call( timeline );
+	createSeason( timeline );
+}
 
-Object.entries( series ).forEach( function( serie ) {
-	const elTitle = document.createElement( "div" ),
-		elSerie = document.createElement( "div" );
+const minYear = 2005,
+	maxYear = 2020,
+	elTimeline = document.getElementById( "timelines" ),
+	timeline = new Timeline( elTimeline, minYear, maxYear,
+		new Date().toDateString() );
 
-	elTitle.classList.add( "title" );
-	elTitle.innerHTML = serie[ 0 ];
+timeline.render();
+createSeason( timeline );
 
-	serie[ 1 ].seasons.forEach( function( s ) {
-		const elSeason = document.createElement( "div" ),
-			sDuration = t( s.lastAired ) - t( s.firstAired ); // season timestamp
-
-		elSeason.classList.add( "season" );
-		elSeason.style.width = `${ sDuration / timeDuration * 100 }%`;
-		elSeason.style.left = `${ ( t( s.firstAired ) - t( minYear ) ) / timeDuration * 100}%`;
-
-		elSerie.appendChild( elSeason );
-		elSerie.appendChild( elTitle );
-	});
-
-	elSerie.classList.add( "serie" );
-	elTimelines.appendChild( elSerie );
-});
