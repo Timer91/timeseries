@@ -1,11 +1,16 @@
-html, body {
-	display: flex;
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	background-color: #111;
-	font-family: sans-serif;
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background-color: hsla(211, 22%, 15%, 1);
+    font-family: sans-serif;
 }
 
 #timelines {
@@ -23,8 +28,8 @@ html, body {
 	line-height: 40px;
 }
 
-.serie:nth( 2n+1 ) {
-	margin-top: 2px;
+.serie + .serie {
+	margin-top: 1px;
 }
 
 .title {
@@ -36,12 +41,15 @@ html, body {
 	box-sizing: border-box;
 	cursor: default;
 	color: #ddd;
-	background-color: rgba( 255, 255, 255, .25 );
+	background-color: rgba( 255, 255, 255, .12 );
 	transition: color .5s, background-color .5s;
 }
 
-.serie:hover .title {
+#timelines:hover .serie:not(:hover) .title {
 	color: rgba( 255, 255, 255, .2 );
+}
+
+.serie:hover .title {
 	background-color: rgba( 255, 255, 255, .07 );
 }
 
