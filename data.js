@@ -19,20 +19,32 @@
 			{ "nb": 2, "nbEpisodes": 9, "firstAired": "October 27, 2017" },
 		]
 	},
-	"Narcos": {
-		"originalNetwork": "Netflix",
-		"seasons": [
-			{ "nb": 1, "nbEpisodes": 10, "firstAired": "August    28, 2015" },
-			{ "nb": 2, "nbEpisodes": 10,  "firstAired": "September  2, 2016" },
-			{ "nb": 3, "nbEpisodes": 10,  "firstAired": "September  1, 2017" },
-		]
-	},
 	"Mr. Robot": {
 		"originalNetwork": "USA Network",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes": 10, "firstAired": "June    24, 2015" },
 			{ "nb": 2, "nbEpisodes": 12, "firstAired": "July    13, 2016" },
 			{ "nb": 3, "nbEpisodes": 10, "firstAired": "October 11, 2017" },
+		]
+	},
+	"Narcos": {
+		"originalNetwork": "Netflix",
+		"seasons": [
+			{ "nb": 1, "nbEpisodes": 10, "firstAired": "August    28, 2015" },
+			{ "nb": 2, "nbEpisodes": 10, "firstAired": "September  2, 2016" },
+			{ "nb": 3, "nbEpisodes": 10, "firstAired": "September  1, 2017" },
+		]
+	},
+	"Game of Thrones": {
+		"originalNetwork": "HBO",
+		"seasons": [
+			{ "nb": 1, "nbEpisodes": 10, "firstAired": "April 17, 2011" },
+			{ "nb": 2, "nbEpisodes": 10, "firstAired": "April  1, 2012" },
+			{ "nb": 3, "nbEpisodes": 10, "firstAired": "March 21, 2013" },
+			{ "nb": 4, "nbEpisodes": 10, "firstAired": "April 17, 2014" },
+			{ "nb": 5, "nbEpisodes": 10, "firstAired": "April 15, 2015" },
+			{ "nb": 6, "nbEpisodes": 10, "firstAired": "April 15, 2016" },
+			{ "nb": 7, "nbEpisodes":  7, "firstAired": "July  11, 2017" },
 		]
 	},
 	"Better Call Saul": {
@@ -51,7 +63,20 @@
 			{ "nb": 3, "nbEpisodes": 13, "firstAired": "March   21, 2010" },
 			{ "nb": 4, "nbEpisodes": 13, "firstAired": "July    17, 2011" },
 			{ "nb": 5, "nbEpisodes":  8, "firstAired": "July    15, 2012" },
-			{ "nb": 5, "nbEpisodes":  8, "firstAired": "August  11, 2013" },
+			{ "nb": 6, "nbEpisodes":  8, "firstAired": "August  11, 2013" },
+		]
+	},
+	"House": {
+		"originalNetwork": "Fox",
+		"seasons": [
+			{ "nb": 1, "nbEpisodes": 22, "firstAired": "November  17, 2004" },
+			{ "nb": 2, "nbEpisodes": 22, "firstAired": "September 14, 2005" },
+			{ "nb": 3, "nbEpisodes": 24, "firstAired": "September  6, 2006" },
+			{ "nb": 4, "nbEpisodes": 16, "firstAired": "September 26, 2007" },
+			{ "nb": 5, "nbEpisodes": 24, "firstAired": "September 17, 2008" },
+			{ "nb": 6, "nbEpisodes": 21, "firstAired": "September 22, 2009" },
+			{ "nb": 7, "nbEpisodes": 23, "firstAired": "September 21, 2010" },
+			{ "nb": 8, "nbEpisodes": 22, "firstAired": "October    4, 2011" },
 		]
 	},
 }
