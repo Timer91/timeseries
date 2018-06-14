@@ -62,16 +62,11 @@ body {
 	box-sizing: border-box;
 }
 
-.serie:nth-child( 1 ) .season {
-	border-left: 7px solid #9b59b6;
-}
-.serie:nth-child( 2 ) .season {
-	border-left: 7px solid #f39c12;
-}
-.serie:nth-child( 3 ) .season {
-	border-left: 7px solid #c0392b;
-}
-.serie:nth-child( 4 ) .season {
-	border-left: 7px solid #27ae60;
-}
+.serie:nth-child( 1 ) .season { border-left: 7px solid #9b59b6; }
+.serie:nth-child( 2 ) .season { border-left: 7px solid #f39c12; }
+.serie:nth-child( 3 ) .season { border-left: 7px solid #c0392b; }
+.serie:nth-child( 4 ) .season { border-left: 7px solid #27ae60; }
+.serie:nth-child( 5 ) .season { border-left: 7px solid #ea6027; }
+.serie:nth-child( 6 ) .season { border-left: 7px solid #0e627a; }
+.serie:nth-child( 7 ) .season { border-left: 7px solid #627a0e; }
 
