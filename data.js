@@ -1,5 +1,6 @@
  var series = {
 	"The Walking Dead": {
+		"key": "twd",
 		"originalNetwork": "AMC",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes":  6, "firstAired": "October 31, 2010" },
@@ -13,6 +14,7 @@
 		]
 	},
 	"Stranger Things": {
+		"key": "strangerthings",
 		"originalNetwork": "Netflix",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes": 8, "firstAired": "July    15, 2016" },
@@ -20,6 +22,7 @@
 		]
 	},
 	"Mr. Robot": {
+		"key": "mrrobot",
 		"originalNetwork": "USA Network",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes": 10, "firstAired": "June    24, 2015" },
@@ -28,6 +31,7 @@
 		]
 	},
 	"Narcos": {
+		"key": "narcos",
 		"originalNetwork": "Netflix",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes": 10, "firstAired": "August    28, 2015" },
@@ -36,6 +40,7 @@
 		]
 	},
 	"Game of Thrones": {
+		"key": "got",
 		"originalNetwork": "HBO",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes": 10, "firstAired": "April 17, 2011" },
@@ -48,6 +53,7 @@
 		]
 	},
 	"Better Call Saul": {
+		"key": "bcs",
 		"originalNetwork": "AMC",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes": 10, "firstAired": "February  8, 2015" },
@@ -56,6 +62,7 @@
 		]
 	},
 	"Breaking Bad": {
+		"key": "brba",
 		"originalNetwork": "AMC",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes":  7, "firstAired": "January 20, 2008" },
@@ -67,6 +74,7 @@
 		]
 	},
 	"House": {
+		"key": "house",
 		"originalNetwork": "Fox",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes": 22, "firstAired": "November  17, 2004" },
