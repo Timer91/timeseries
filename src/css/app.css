@@ -1,0 +1,19 @@
+@font-face {
+	font-family: 'FontAwesome';
+	src: url('../../assets/webfont.woff2') format('woff2');
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background-color: hsla(211, 22%, 15%, 1);
+    font-family: sans-serif;
+}
