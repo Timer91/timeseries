@@ -13,10 +13,6 @@ class Timeline {
 		this._viewBox = this.rootElement.offsetWidth;
 	}
 
-	monthsBetween( d1, d2 ) {
-		return ( Date.parse( d2 ) - Date.parse( d1 ) ) /
-			( 1000 * 60 * 60 * 24 * 30.4375 ); // <-- days per month in a year
-	}
 	pxPerMonth() {
 		return this._viewBox / this._years.inMonth;
 	}
@@ -33,9 +29,7 @@ class Timeline {
 	_render() {
 		const el = this.rootElement,
 			monthPx = this.pxPerMonth(),
-			curMonth = this.monthsBetween(
-				this._years.start,
-				this._years.cur ),
+			curMonth = monthsBetween( this._years.start, this._years.cur ),
 			steps = [
 				`<rect x='0' height='1px' width='1px'
 					fill='${ this._color.year }'/>`,

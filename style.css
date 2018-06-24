@@ -28,6 +28,10 @@ body {
 	line-height: 40px;
 }
 
+.opacity {
+	opacity: .5;
+}
+
 .serie + .serie {
 	margin-top: 1px;
 }
@@ -41,32 +45,33 @@ body {
 	box-sizing: border-box;
 	cursor: default;
 	color: #ddd;
-	background-color: rgba( 255, 255, 255, .12 );
+	background-color: rgba(255, 255, 255, .12);
 	transition: color .5s, background-color .5s;
 }
 
-#timelines:hover .serie:not(:hover) .title {
-	color: rgba( 255, 255, 255, .2 );
+#timelines:hover .serie:not(:hover) .title,
+#timelines.no-hover:hover .serie:hover .title {
+	color: rgba(255, 255, 255, .2);
 }
 
-.serie:hover .title {
-	background-color: rgba( 255, 255, 255, .07 );
+#timelines:not(.no-hover) .serie:hover .title {
+	background-color: rgba(255, 255, 255, .07);
 }
 
 .season {
 	position: absolute;
 	height: 100%;
-	background: rgba( 255, 255, 255, .18 );
+	background: rgba(255, 255, 255, .18);
 	border-radius: 4px;
 	border-left: 7px solid #2980b9;
 	box-sizing: border-box;
 }
 
-.serie:nth-child( 1 ) .season { border-left: 7px solid #9b59b6; }
-.serie:nth-child( 2 ) .season { border-left: 7px solid #f39c12; }
-.serie:nth-child( 3 ) .season { border-left: 7px solid #c0392b; }
-.serie:nth-child( 4 ) .season { border-left: 7px solid #27ae60; }
-.serie:nth-child( 5 ) .season { border-left: 7px solid #ea6027; }
-.serie:nth-child( 6 ) .season { border-left: 7px solid #0e627a; }
-.serie:nth-child( 7 ) .season { border-left: 7px solid #627a0e; }
+div[name="twd"]            .season { border-left: 7px solid #9b59b6; }
+div[name="strangerthings"] .season { border-left: 7px solid #f39c12; }
+div[name="mrrobot"]        .season { border-left: 7px solid #c0392b; }
+div[name="narcos"]         .season { border-left: 7px solid #27ae60; }
+div[name="got"]            .season { border-left: 7px solid #ea6027; }
+div[name="bcs"]            .season { border-left: 7px solid #0e627a; }
+div[name="brba"]           .season { border-left: 7px solid #627a0e; }
 

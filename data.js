@@ -1,6 +1,6 @@
- var series = {
-	"The Walking Dead": {
-		"key": "twd",
+ var data = {
+	"twd": {
+		"title": "The Walking Dead",
 		"originalNetwork": "AMC",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes":  6, "firstAired": "October 31, 2010" },
@@ -13,16 +13,16 @@
 			{ "nb": 8, "nbEpisodes": 16, "firstAired": "October 22, 2017" },
 		]
 	},
-	"Stranger Things": {
-		"key": "strangerthings",
+	"strangerthings": {
+		"title": "Stranger Things",
 		"originalNetwork": "Netflix",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes": 8, "firstAired": "July    15, 2016" },
 			{ "nb": 2, "nbEpisodes": 9, "firstAired": "October 27, 2017" },
 		]
 	},
-	"Mr. Robot": {
-		"key": "mrrobot",
+	"mrrobot": {
+		"title": "Mr. Robot",
 		"originalNetwork": "USA Network",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes": 10, "firstAired": "June    24, 2015" },
@@ -30,8 +30,8 @@
 			{ "nb": 3, "nbEpisodes": 10, "firstAired": "October 11, 2017" },
 		]
 	},
-	"Narcos": {
-		"key": "narcos",
+	"narcos": {
+		"title": "Narcos",
 		"originalNetwork": "Netflix",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes": 10, "firstAired": "August    28, 2015" },
@@ -39,8 +39,8 @@
 			{ "nb": 3, "nbEpisodes": 10, "firstAired": "September  1, 2017" },
 		]
 	},
-	"Game of Thrones": {
-		"key": "got",
+	"got": {
+		"title": "Game of Thrones",
 		"originalNetwork": "HBO",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes": 10, "firstAired": "April 17, 2011" },
@@ -52,8 +52,8 @@
 			{ "nb": 7, "nbEpisodes":  7, "firstAired": "July  11, 2017" },
 		]
 	},
-	"Better Call Saul": {
-		"key": "bcs",
+	"bcs": {
+		"title": "Better Call Saul",
 		"originalNetwork": "AMC",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes": 10, "firstAired": "February  8, 2015" },
@@ -61,8 +61,8 @@
 			{ "nb": 3, "nbEpisodes": 10, "firstAired": "April    10, 2017" },
 		]
 	},
-	"Breaking Bad": {
-		"key": "brba",
+	"brba": {
+		"title": "Breaking Bad",
 		"originalNetwork": "AMC",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes":  7, "firstAired": "January 20, 2008" },
@@ -73,8 +73,8 @@
 			{ "nb": 6, "nbEpisodes":  8, "firstAired": "August  11, 2013" },
 		]
 	},
-	"House": {
-		"key": "house",
+	"house": {
+		"title": "House",
 		"originalNetwork": "Fox",
 		"seasons": [
 			{ "nb": 1, "nbEpisodes": 22, "firstAired": "November  17, 2004" },

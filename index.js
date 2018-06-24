@@ -1,45 +1,24 @@
 "use strict";
 
-function createSeason( timeline ) {
-	const pxPerMonth = timeline.pxPerMonth(),
-		pxPerWeek = pxPerMonth * 12 / 52;
-
-	timeline.rootElement.innerHTML = "";
-	Object.entries( series ).forEach( serie => {
-		const elTitle = document.createElement( "div" ),
-			elSerie = document.createElement( "div" );
-
-		elTitle.classList.add( "title" );
-		elTitle.innerHTML = serie[ 0 ];
-
-		serie[ 1 ].seasons.forEach( s => {
-			const elSeason = document.createElement( "div" ),
-				sMonth = timeline.monthsBetween( minYear, s.firstAired );
-
-			elSeason.classList.add( "season" );
-			elSeason.style.width = pxPerWeek * s.nbEpisodes + "px";
-			elSeason.style.left = sMonth * pxPerMonth + "px";
-			elSerie.appendChild( elSeason );
-			elSerie.appendChild( elTitle );
-		});
-
-		elSerie.classList.add( "serie" );
-		timeline.rootElement.appendChild( elSerie );
-	});
-}
-
-window.onresize = _ => {
-	timeline.resize.call( timeline );
-	createSeason( timeline );
-	return false;
+function monthsBetween( d1, d2 ) {
+	return ( Date.parse( d2 ) - Date.parse( d1 ) ) /
+		( 1000 * 60 * 60 * 24 * 30.4375 ); // <-- days per month in a year
 }
 
 const minYear = 2004,
 	maxYear = 2020,
+	now = new Date().toDateString(),
 	elTimeline = document.getElementById( "timelines" ),
-	timeline = new Timeline( elTimeline, minYear, maxYear,
-		new Date().toDateString() );
+	timeline = new Timeline( elTimeline, minYear, maxYear, now ),
+	series = new Series( data, elTimeline, minYear ),
+	dnd = new DragAndDrop( elTimeline );
 
 timeline.render();
-createSeason( timeline );
+series.render();
+series.resize( timeline.pxPerMonth() );
 
+window.onresize = _ => {
+	timeline.resize.call( timeline );
+	series.resize.call( series, timeline.pxPerMonth() );
+	return false;
+}
