@@ -32,6 +32,7 @@
 	color: var( --title-color );
 	background-color: var( --title-bg-color );
 	transition: color .5s, background-color .5s;
+	z-index: 1;
 }
 
 #timelines:hover .serie:not(:hover) .title,
