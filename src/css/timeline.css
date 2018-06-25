@@ -3,40 +3,40 @@
 	width: 100%;
 	margin: 20px;
 	border-radius: 4px;
-	background-color: #283440;
+	background-color: var( --timeline-bg );
 }
 
 .serie {
+	display: flex;
 	position: relative;
-	height: 40px;
+	height: var( --serie-height );
 	box-sizing: border-box;
-	line-height: 40px;
+	line-height: var( --serie-height );
+	transition: opacity .5s;
 }
 
-.opacity {
-	opacity: .5;
+.serie-opacity {
+	opacity: var( --serie-opacity );
 }
 
 .serie + .serie {
-	margin-top: 1px;
+	margin-top: var( --serie-margin-top );
 }
 
 .title {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	padding-right: 10px;
+	flex: 1;
+	padding-right: var( --title-padding-right );
 	text-align: right;
 	box-sizing: border-box;
 	cursor: default;
-	color: #ddd;
-	background-color: rgba(255, 255, 255, .12);
+	color: var( --title-color );
+	background-color: var( --title-bg-color );
 	transition: color .5s, background-color .5s;
 }
 
 #timelines:hover .serie:not(:hover) .title,
 #timelines.no-hover:hover .serie:hover .title {
-	color: rgba(255, 255, 255, .2);
+	color: var( --title-bg-color );
 }
 
 #timelines:not(.no-hover) .serie:hover .title {
@@ -46,16 +46,17 @@
 .season {
 	position: absolute;
 	height: 100%;
-	background: rgba(255, 255, 255, .18);
-	border-radius: 4px;
-	border-left: 7px solid #2980b9;
+	background: var( --season-bg-color );
+	border-radius: var( --season-bd-rad );
+	border-left: var( --season-bd );
 	box-sizing: border-box;
 }
 
-div[name="twd"]            .season { border-left: 7px solid #9b59b6; }
-div[name="strangerthings"] .season { border-left: 7px solid #f39c12; }
-div[name="mrrobot"]        .season { border-left: 7px solid #c0392b; }
-div[name="narcos"]         .season { border-left: 7px solid #27ae60; }
-div[name="got"]            .season { border-left: 7px solid #ea6027; }
-div[name="bcs"]            .season { border-left: 7px solid #0e627a; }
-div[name="brba"]           .season { border-left: 7px solid #627a0e; }
+div[name="twd"]            .season { border-color: #9b59b6; }
+div[name="strangerthings"] .season { border-color: #f39c12; }
+div[name="mrrobot"]        .season { border-color: #c0392b; }
+div[name="narcos"]         .season { border-color: #27ae60; }
+div[name="got"]            .season { border-color: #ea6027; }
+div[name="bcs"]            .season { border-color: #0e627a; }
+div[name="brba"]           .season { border-color: #627a0e; }
+div[name="house"]          .season { border-color: #2980b9; }

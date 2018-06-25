@@ -1,6 +1,6 @@
 @font-face {
-	font-family: 'FontAwesome';
-	src: url('../../assets/webfont.woff2') format('woff2');
+	font-family: "FontAwesome";
+	src: url("../../assets/fontawesome-solid.woff2") format("woff2");
 }
 
 html {
@@ -14,6 +14,22 @@ body {
     align-items: center;
     margin: 0;
     padding: 0;
-    background-color: hsla(211, 22%, 15%, 1);
+    background-color: var( --app-bg );
     font-family: sans-serif;
 }
+
+.icon {
+    position: relative;
+    display: inline-block;
+    font-family: "FontAwesome";
+    font-weight: normal;
+    font-style: normal;
+    text-align: center;
+    text-indent: 0;
+    width: 1.25em;
+}
+
+.ico-drag::before {
+    content: "\f142";
+}
+

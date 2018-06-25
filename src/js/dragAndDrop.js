@@ -16,7 +16,7 @@ class DragAndDrop {
 		
 		e.dataTransfer.effectAllowed = "move";
 		e.dataTransfer.setData( "Text", this.curDrag.textContent );
-		this.curDrag.classList.add( "opacity" );
+		this.curDrag.classList.add( "serie-opacity" );
 		this.rootElement.classList.add( "no-hover" );
 	}
 	_onDragOver( e ) {
@@ -36,7 +36,7 @@ class DragAndDrop {
 	_onDrop( e ) {
 		e.preventDefault();
 		e.stopPropagation();
-		this.curDrag.classList.remove( "opacity" );
+		this.curDrag.classList.remove( "serie-opacity" );
 		this.rootElement.classList.remove( "no-hover" );
 		this._localStorageUpdate();
 		return false;
