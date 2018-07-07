@@ -11,11 +11,12 @@ const minYear = 2004,
 	elTimeline = document.getElementById( "timelines" ),
 	timeline = new Timeline( elTimeline, minYear, maxYear, now ),
 	series = new Series( data, elTimeline, minYear ),
-	dnd = new DragAndDrop( elTimeline );
+	dnd = new DragAndDrop( elTimeline, "drag" );
 
 timeline.render();
 series.render();
 series.resize( timeline.pxPerMonth() );
+dnd.init();
 
 window.onresize = _ => {
 	timeline.resize.call( timeline );

@@ -37,7 +37,8 @@ class Series {
 	_createSerie( sId ) {
 		const serie = this.series[ sId ],
 			elSerie = document.createElement( "div" ),
-			elTitle = document.createElement( "div" );
+			elTitle = document.createElement( "div" ),
+			elDrag = document.createElement( "div" );
 
 		serie.seasons.forEach( s => {
 			const elSeason = document.createElement( "div" );
@@ -47,10 +48,11 @@ class Series {
 		});
 		elTitle.classList.add( "title" );
 		elTitle.innerHTML = serie.title;
+		elDrag.classList.add( "drag", "icon", "ico-drag" );
 		elSerie.classList.add( "serie" );
 		elSerie.setAttribute( "name", sId );
-		elSerie.setAttribute( "draggable", true );
 		elSerie.appendChild( elTitle );
+		elSerie.appendChild( elDrag );
 		this.rootElement.appendChild( elSerie );
 	}
 	_render() {

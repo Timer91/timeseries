@@ -1,21 +1,36 @@
 "use strict";
 
 class DragAndDrop {
-	constructor( el ) {
+	constructor( el, handle ) {
 		this.rootElement = el;
 		this.curDrag = null;
-		[].slice.call( el.children )
-			.forEach( serie => { serie.draggable = true; } );
-		el.ondragstart = this._onDragStart.bind( this );
-		document.body.ondragover = this._onDragOver.bind( this );
-		document.body.ondrop = this._onDrop.bind( this );
+		this.handle = handle;
 	}
 	
+	init() {
+		const el = this.rootElement,
+			handlers = el.getElementsByClassName( this.handle );
+
+		[].slice.call( el.children ).forEach( serie => {
+			serie.draggable = false;
+			serie.ondragstart = this._onDragStart.bind( this );
+			serie.ondragover = this._onDragOver.bind( this );
+			serie.ondragend = this._onDragEnd.bind( this );
+			serie.ondrop = this._onDrop.bind( this );
+		});
+		for ( let h of handlers ) {
+			h.onmousedown = this._onMouseDown.bind( this );
+		}
+	}
+
+	// private
+	_onMouseDown( e ) {
+		e.target.parentNode.setAttribute( "draggable", "true" );
+	}
 	_onDragStart( e ) {
 		this.curDrag = e.target;
-		
 		e.dataTransfer.effectAllowed = "move";
-		e.dataTransfer.setData( "Text", this.curDrag.textContent );
+		e.dataTransfer.setData( "Text", this.curDrag.parentNode.textContent );
 		this.curDrag.classList.add( "serie-opacity" );
 		this.rootElement.classList.add( "no-hover" );
 	}
@@ -33,13 +48,15 @@ class DragAndDrop {
 		}
 		return false;
 	}
+	_onDragEnd( e ) {
+		e.target.setAttribute( "draggable", "false" );
+		this.curDrag.classList.remove( "serie-opacity" );
+		this.rootElement.classList.remove( "no-hover" );
+	}
 	_onDrop( e ) {
 		e.preventDefault();
 		e.stopPropagation();
-		this.curDrag.classList.remove( "serie-opacity" );
-		this.rootElement.classList.remove( "no-hover" );
 		this._localStorageUpdate();
-		return false;
 	}
 	_localStorageUpdate( order ) {
 		localStorage.setItem( "order", 
