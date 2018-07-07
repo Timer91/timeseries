@@ -29,6 +29,10 @@
 	text-align: right;
 	box-sizing: border-box;
 	cursor: default;
+}
+
+.title,
+.drag {
 	color: var( --title-color );
 	background-color: var( --title-bg-color );
 	transition: color .5s, background-color .5s;
@@ -36,12 +40,14 @@
 }
 
 #timelines:hover .serie:not(:hover) .title,
-#timelines.no-hover:hover .serie:hover .title {
+#timelines:hover .serie:not(:hover) .drag,
+#timelines.no-hover:hover .serie:hover .title,
+#timelines.no-hover:hover .serie:hover .drag {
 	color: var( --title-bg-color );
 }
 
 #timelines:not(.no-hover) .serie:hover .title {
-	background-color: rgba(255, 255, 255, .07);
+	background-color: rgba( 255, 255, 255, .07 );
 }
 
 .season {
