@@ -1,64 +1,63 @@
 "use strict";
 
-class Series {
-	constructor( data, el, minYear ) {
-		this.series = data;
-		this.rootElement = el;
-		this.minYear = minYear;
-		this.setOrder( Object.keys( this.series ) );
-	}
+TS.series = {
+	init: function() {
+		this.rootEl = TS.container;
+
+		this.setOrder( Object.keys( TS.data ) );
+		this._generate();
+		this.render();
+	},
 
 	getOrder() {
 		return localStorage.order.split( ',' );
-	} 
+	},
 	setOrder( order ) {
 		localStorage.hasOwnProperty( "order" ) || localStorage.setItem( "order", order );
-	}
-	resize( pxPerMonth ) {
-		const pxPerWeek = pxPerMonth * 12 / 52,
-			order = this.getOrder();
+	},
 
-		order.forEach( id => {
-			const elSeasons = document
-					.querySelectorAll( "div[name=" + id + "] .season" );
-			this.series[ id ].seasons.forEach( ( s, i ) => { 
-				const sMonth = monthsBetween( this.minYear, s.firstAired );
+	render() {
+		const pxMonth = TS.pxPerMonth(),
+			pxWeek = pxMonth * 12 / 52;
 
-				elSeasons[ i ].style.width = pxPerWeek * s.nbEpisodes + "px";
-				elSeasons[ i ].style.left = sMonth * pxPerMonth + "px";
+		this.getOrder().forEach( id => {
+			const els = document.querySelectorAll( `[name="${id}"] .season` ),
+				seasons = TS.data[ id ].seasons;
+			let w = 0, l = 0, m = 0;
+
+			els.forEach( ( el, i ) => {
+				const s = seasons[ i ];
+
+				m = TS.howManyMonths( TS.start, s.firstAired );
+				w = pxWeek * s.nbEpisodes + "px";
+				l = m * pxMonth + "px";
+				el.style.width = w;
+				el.style.left = l;
 			} )
 		});
-	}
-	render() {
-		this._render();
-	}
+	},
 
 	// private
+	_generate() {
+		this.rootEl.innerHTML = "";
+		this.getOrder().forEach( sId => {
+			TS.data.hasOwnProperty( sId ) && this._createSerie( sId );
+		});
+	},
 	_createSerie( sId ) {
-		const serie = this.series[ sId ],
-			elSerie = document.createElement( "div" ),
-			elTitle = document.createElement( "div" ),
-			elDrag = document.createElement( "div" );
+		const serie = TS.data[ sId ],
+			template = document.querySelector( "#serie" ),
+			elSerie = template.content.children[ 0 ].cloneNode( true ),
+			elTitle = elSerie.querySelector( ".title" );
 
 		serie.seasons.forEach( s => {
 			const elSeason = document.createElement( "div" );
 
-			elSeason.classList.add( "season" );;
-			elSerie.appendChild( elSeason );
+			elSeason.classList.add( "season" );
+			elSerie.prepend( elSeason );
 		});
-		elTitle.classList.add( "title" );
-		elTitle.innerHTML = serie.title;
-		elDrag.classList.add( "drag", "icon", "ico-drag" );
-		elSerie.classList.add( "serie" );
 		elSerie.setAttribute( "name", sId );
-		elSerie.appendChild( elTitle );
-		elSerie.appendChild( elDrag );
-		this.rootElement.appendChild( elSerie );
-	}
-	_render() {
-		this.rootElement.innerHTML = "";
-		this.getOrder().forEach( sId => {
-			this.series.hasOwnProperty( sId ) && this._createSerie( sId );
-		});
-	}
+		elTitle.innerHTML = serie.title;
+		this.rootEl.append( elSerie );
+	},
 }

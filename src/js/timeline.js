@@ -1,42 +1,29 @@
 "use strict";
 
-class Timeline {
-	constructor( el, start, end, cur ) {
-		this.rootElement = el;
-		this._years = {
-			start, end, cur,
-			inMonth: ( end - start ) * 12 };
+TS.timeline = {
+	init: function() {
 		this._color = {
-			cur: "rgba( 255, 255, 255, .1 )",
+			now: "rgba( 255, 255, 255, .3 )",
 			year: "rgba( 0, 0, 0, .5 )",
-			month: "rgba( 0, 0, 0, .2 )" }
-		this._viewBox = this.rootElement.offsetWidth;
-	}
+			month: "rgba( 0, 0, 0, .2 )"
+		};
 
-	pxPerMonth() {
-		return this._viewBox / this._years.inMonth;
-	}
-	resize() {
-		this._viewBox = this.rootElement.offsetWidth;
-		this.rootElement.style.backgroundSize = `${this._viewBox}px 1px`;
 		this.render();
-	}
-	render() {
-		this._render();
-	}
+	},
 
 	// private:
-	_render() {
-		const el = this.rootElement,
-			monthPx = this.pxPerMonth(),
-			curMonth = monthsBetween( this._years.start, this._years.cur ),
+	render: function() {
+		const el = TS.container,
+			monthPx = TS.pxPerMonth(),
+			nDays = TS.howManyMonths( TS.start, TS.now ),
 			steps = [
 				`<rect x='0' height='1px' width='1px'
-					fill='${ this._color.year }'/>`,
-				`<rect height='1px' width='3px' x='${ monthPx * curMonth }'
-					fill='${ this._color.cur }'/>` ];
+					fill='${ this._color.year }'/>`, // first line
+				`<rect height='1px' width='3px' x='${ monthPx * nDays }'
+					fill='${ this._color.now }'/>` ]; // current date
 
-		for ( let month = 1; month < this._years.inMonth; ++month ) {
+		el.style.backgroundSize = `${el.offsetWidth}px 1px`;
+		for ( let month = 1; month < TS.nbMonths; ++month ) {
 			steps.push( `<rect height='1px' width='1px'
 				x='${monthPx * month}' fill='${
 				month % 12 ? this._color.month : this._color.year}' />` );
@@ -44,8 +31,7 @@ class Timeline {
 		el.style.backgroundImage = `url("${ encodeURI(
 			"data:image/svg+xml,<svg preserveAspectRatio='none' " +
 			"xmlns='http://www.w3.org/2000/svg'" +
-			` viewBox='0 0 ${this._viewBox} 1'>` +
+			` viewBox='0 0 ${el.offsetWidth} 1'>` +
 			`${steps.join( " " ) }</svg>` )}")`;
-		el.style.backgroundSize = `${this._viewBox}px 1px`;
 	}
 }

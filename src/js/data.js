@@ -1,4 +1,4 @@
- var data = {
+ const data = {
 	"twd": {
 		"title": "The Walking Dead",
 		"originalNetwork": "AMC",
