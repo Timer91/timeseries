@@ -11,6 +11,7 @@
 			{ "nb": 6, "nbEpisodes": 16, "firstAired": "October 11, 2015" },
 			{ "nb": 7, "nbEpisodes": 16, "firstAired": "October 23, 2016" },
 			{ "nb": 8, "nbEpisodes": 16, "firstAired": "October 22, 2017" },
+			{ "nb": 9, "nbEpisodes": 9,  "firstAired": "October  7, 2018" },
 		]
 	},
 	"strangerthings": {
@@ -19,6 +20,7 @@
 		"seasons": [
 			{ "nb": 1, "nbEpisodes": 8, "firstAired": "July    15, 2016" },
 			{ "nb": 2, "nbEpisodes": 9, "firstAired": "October 27, 2017" },
+			{ "nb": 3, "nbEpisodes": 8, "firstAired": "July     4, 2019" },
 		]
 	},
 	"mrrobot": {
@@ -59,6 +61,7 @@
 			{ "nb": 1, "nbEpisodes": 10, "firstAired": "February  8, 2015" },
 			{ "nb": 2, "nbEpisodes": 10, "firstAired": "February 15, 2016" },
 			{ "nb": 3, "nbEpisodes": 10, "firstAired": "April    10, 2017" },
+			{ "nb": 4, "nbEpisodes": 10, "firstAired": "August    6, 2018" },
 		]
 	},
 	"brba": {
