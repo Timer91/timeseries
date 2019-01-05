@@ -61,12 +61,3 @@
 	border-left: var( --season-bd );
 	box-sizing: border-box;
 }
-
-div[name="twd"]            .season { border-color: #9b59b6; }
-div[name="strangerthings"] .season { border-color: #f39c12; }
-div[name="mrrobot"]        .season { border-color: #c0392b; }
-div[name="narcos"]         .season { border-color: #27ae60; }
-div[name="got"]            .season { border-color: #ea6027; }
-div[name="bcs"]            .season { border-color: #0e627a; }
-div[name="brba"]           .season { border-color: #627a0e; }
-div[name="house"]          .season { border-color: #2980b9; }

@@ -1,15 +1,21 @@
 "use strict";
 
-TS.betaseries.init().then( () => {
-	TS.timeline.init();
-	TS.series.init();
-	TS.dnd.init();
-});
+UI.init = function() {
+	UI.timeline.init();
+	UI.series.init();
+	UI.dnd.init();
+};
 
-window.onresize = _ => {
-	TS.timeline.render();
-	TS.series.render();
+window.onresize = () => {
+	UI.timeline.render();
+	UI.series.render();
 	return false;
 }
 
+function run() {
+	STORE.has( "shows" )
+		? UI.init()
+		: TS.betaseries.init().then( UI.init );
+}
 
+run();

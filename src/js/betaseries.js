@@ -11,17 +11,13 @@ TS.betaseries = {
 			"X-BetaSeries-Version": "3.0",
 			"X-BetaSeries-Key": this.API_KEY,
 		});
-		this.session = null;
-		this.shows = null;
 
 		return this.connection()
 			.then( () => {
-				if ( this.session ) {
-					return this.getMemberShows()
-						.then( () => this.getShowEpisodes() )
-						.then( () => this.filterShow() );
-				}
-			});
+				return this.getMemberShows()
+					.then( () => this.getShowEpisodes() )
+					.then( () => this.cleanShows() );
+			})
 	},
 
 	connection: function() {
@@ -31,45 +27,56 @@ TS.betaseries = {
 				headers: this.headers,
 		})
 		.then( res => res.json() )
-		.then( res => this.session = res );
+		.then( res => STORE.set( "session", res ) );
 	},
 	getMemberShows: function() {
-		return fetch( `https://api.betaseries.com/shows/member?id=${this.session.user.id}`, {
+		const s = STORE.get( "session" );
+
+		return fetch( `https://api.betaseries.com/shows/member?id=${s.user.id}`, {
 			method: "GET",
 			headers: this.headers,
 		})
 		.then( res => res.json() )
-		.then( res => this.shows = res.shows );
+		.then( res => STORE.set( "shows", res.shows ) );
 	},
 	getShowEpisodes: function() {
-		const promises = [];
+		const promises = [],
+			shows = STORE.get( "shows" ),
+			episodes = new Map();
 
-		this.shows.forEach( ( s, i ) => {
+		shows.forEach( ( s, i ) => {
 			const p = fetch( `https://api.betaseries.com/shows/episodes?id=${s.id}`, {
 				method: "GET",
 				headers: this.headers,
 			})
 			.then( res => res.json() )
-			.then( res => { this.shows[ i ][ "episodes" ] = res.episodes } )
+			.then( res => { episodes.set( s.id, res.episodes ) } );
 			promises.push( p );
 		});
-		return Promise.all( promises );
+		return Promise.all( promises )
+			.then( () => STORE.set( "episodes", Array.from( episodes ) ) );
 	},
-	filterShow: function() {
-		const shows = new Map();
+	cleanShows: function() {
+		const oldShows = STORE.get( "shows" ),
+			episodes = new Map( STORE.get( "episodes" ) ),
+			shows = new Map();
 
-		this.shows.forEach( ( s, i ) => {
-			const show = {
-				title: s.title,
-				network: s.network,
-				seasons: s.seasons_details
-			};
-			s.episodes.forEach( ( e, i ) => {
+		oldShows.forEach( ( s, i ) => {
+			const sEps = episodes.get( +s.id ),
+				show = {
+					title: s.title,
+					network: s.network,
+					seasons: s.seasons_details
+				};
+
+			sEps.forEach( ( e, i ) => {
 				if ( e.episode === 1 ) {
 					show.seasons[ e.season - 1 ][ "firstAired" ] = e.date;
 				}
 			})
 			shows.set( s.id, show );
 		})
-	}
+		STORE.set( "shows", Array.from( shows ) );
+		STORE.remove( "episodes" );
+	},
 }

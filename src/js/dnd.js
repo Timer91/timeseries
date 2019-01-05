@@ -1,8 +1,8 @@
 "use strict";
 
-TS.dnd = {
+UI.dnd = {
 	init: function() {
-		const el = TS.container,
+		const el = UI.wrap,
 			handlers = el.getElementsByClassName( "drag" );
 
 		this.curDrag = null;
@@ -15,6 +15,7 @@ TS.dnd = {
 		});
 		for ( let h of handlers ) {
 			h.onmousedown = this._onMouseDown.bind( this );
+			h.onmouseup = this._onMouseUp.bind( this );
 		}
 	},
 
@@ -22,12 +23,15 @@ TS.dnd = {
 	_onMouseDown: function( e ) {
 		e.target.parentNode.setAttribute( "draggable", "true" );
 	},
+	_onMouseUp: function( e ) {
+		e.target.parentNode.setAttribute( "draggable", "false" );
+	},
 	_onDragStart: function( e ) {
 		this.curDrag = e.target;
 		e.dataTransfer.effectAllowed = "move";
 		e.dataTransfer.setData( "Text", this.curDrag.parentNode.textContent );
 		this.curDrag.classList.add( "serie-opacity" );
-		TS.container.classList.add( "no-hover" );
+		UI.wrap.classList.add( "no-hover" );
 	},
 	_onDragOver: function( e ) {
 		const t = e.target.parentNode;
@@ -44,19 +48,16 @@ TS.dnd = {
 		return false;
 	},
 	_onDragEnd: function( e ) {
-		e.target.setAttribute( "draggable", "false" );
+		this.curDrag.setAttribute( "draggable", "false" );
 		this.curDrag.classList.remove( "serie-opacity" );
-		TS.container.classList.remove( "no-hover" );
+		UI.wrap.classList.remove( "no-hover" );
 	},
 	_onDrop: function( e ) {
+		const order = Array.from( UI.wrap.children )
+			.map( el => el.getAttribute( "name" ) );
+
 		e.preventDefault();
 		e.stopPropagation();
-		this._localStorageUpdate();
+		STORE.set( "order", order );
 	},
-	_localStorageUpdate( order ) {
-		localStorage.setItem( "order", 
-			Array.from( TS.container.children )
-				.map( el => el.getAttribute( "name" ) )
-				.toString() )
-	}
 }
