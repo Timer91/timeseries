@@ -1,8 +1,10 @@
 "use strict";
 
-TS.timeline.init();
-TS.series.init();
-TS.dnd.init();
+TS.betaseries.init().then( () => {
+	TS.timeline.init();
+	TS.series.init();
+	TS.dnd.init();
+});
 
 window.onresize = _ => {
 	TS.timeline.render();
