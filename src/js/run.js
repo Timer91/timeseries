@@ -14,10 +14,10 @@ window.onresize = () => {
 
 function run() {
 	if ( STORE.has( "time" ) &&
-		!TOOLS.pastDay( STORE.get( "time" ) ) ) {
+		!TOOLS.pastDay( STORE.get( "time" ) ) &&
+		STORE.has( "shows" ) ) {
 		UI.init()
 	} else {
-		STORE.clear();
 		TS.betaseries.init().then( UI.init );
 	}
 }
