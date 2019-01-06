@@ -2,7 +2,7 @@
 
 const TS = {
 	start: 2004,
-	end: 2020,
+	end: new Date().getFullYear() + 1,
 	now: new Date().toDateString(),
 };
 
