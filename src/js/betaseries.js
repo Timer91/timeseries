@@ -36,7 +36,8 @@ TS.betaseries = {
 			headers: this.headers,
 		})
 		.then( res => res.json() )
-		.then( res => STORE.set( "shows", res.shows ) );
+		.then( res => STORE.set( "shows", res.shows ) )
+		.then( res => STORE.set( "time", new Date().toString() ) );
 	},
 	
 	// store a Map of shows' episodes => Map( [ [ show.id, [ {ep}, ...] ], ...] )

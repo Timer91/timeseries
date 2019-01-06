@@ -13,9 +13,13 @@ window.onresize = () => {
 }
 
 function run() {
-	STORE.has( "shows" )
-		? UI.init()
-		: TS.betaseries.init().then( UI.init );
+	if ( STORE.has( "time" ) &&
+		!TOOLS.pastDay( STORE.get( "time" ) ) ) {
+		UI.init()
+	} else {
+		STORE.clear();
+		TS.betaseries.init().then( UI.init );
+	}
 }
 
 run();

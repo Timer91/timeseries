@@ -24,13 +24,20 @@ const STORE = {
 	},
 	has( id ) {
 		return localStorage.hasOwnProperty( id );
+	},
+	clear() {
+		localStorage.clear();
 	}
 }
 
 const TOOLS = {
-	monthDur: 1000 * 60 * 60 * 24 * 30.4375, // timestamp of a month duration
+	dayDur: 1000 * 60 * 60 * 24,
+	monthDur: 1000 * 60 * 60 * 24 * 30.4375,
 	monthsBetween( a, b ) {
 		return ( Date.parse( b ) - Date.parse( a ) ) / this.monthDur;
+	},
+	pastDay( a ) {
+		return ( new Date() - Date.parse( a ) ) >= this.dayDur;
 	},
 	monthPx() {
 		return UI.wrap.offsetWidth / TOOLS.monthsBetween( TS.start, TS.end );
