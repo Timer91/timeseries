@@ -1,7 +1,5 @@
 "use strict";
 
-const MONTH_DUR = 1000 * 60 * 60 * 24 * 30.4375; // timestamp of a month duration 
-
 const TS = {
 	start: 2004,
 	end: 2020,
@@ -13,43 +11,40 @@ const UI = {
 }
 
 const STORE = {
-	get: ( id ) => {
+	get( id ) {
 		if ( STORE.has( id ) ) {
 			return JSON.parse( localStorage[ id ] );
 		}
 	},
-	set: ( id, d ) => {
+	set( id, d ) {
 		localStorage.setItem( id, JSON.stringify( d ) );
 	},
-	remove: ( id ) => {
+	remove( id ) {
 		localStorage.removeItem( id );
 	},
-	has: ( id ) => {
+	has( id ) {
 		return localStorage.hasOwnProperty( id );
 	}
-};
+}
 
 const TOOLS = {
-	monthsBetween: ( a, b ) =>
-		( Date.parse( b ) - Date.parse( a ) ) / MONTH_DUR,
-	monthPx: () =>
-		( UI.wrap.offsetWidth / TOOLS.monthsBetween( TS.start, TS.end ) ),
+	monthDur: 1000 * 60 * 60 * 24 * 30.4375, // timestamp of a month duration
+	monthsBetween( a, b ) {
+		return ( Date.parse( b ) - Date.parse( a ) ) / this.monthDur;
+	},
+	monthPx() {
+		return UI.wrap.offsetWidth / TOOLS.monthsBetween( TS.start, TS.end );
+	}
 }
 
 TS.colors = new Map([
-	[ "Better Call Saul", "#627a0e" ],
-	[ "Billions", "#9b59b6" ],
-	[ "Breaking Bad", "#f39c12" ],
-	[ "Fear the Walking Dead", "#c0392b" ],
-	[ "Game of Thrones", "#27ae60" ],
-	[ "House", "#ea6027" ],
-	[ "House of Cards (US)", "#0e627a" ],
-	[ "Mr. Robot", "#2980b9" ],
-	[ "Narcos", "" ],
-	[ "Narcos: Mexico", "" ],
-	[ "The Rain", "" ],
-	[ "The Walking Dead", "" ],
-	[ "YOU", "" ],
+	[ "Netflix", "#e50914" ],
+	[ "AMC", "#e7e198" ],
+	[ "HBO", "#2cb0d8" ],
+	[ "FOX (US)", "#002486" ],
+	[ "Univision", "#42d07c" ],
+	[ "USA Network", "#400195" ],
+	[ "Showtime", "#b00100" ],
 ]);
 
 window.TS = TS;

@@ -12,8 +12,7 @@ UI.series = {
 
 	render() {
 		const order = STORE.get( "order" ),
-			pxMonth = TOOLS.monthPx(),
-			pxWeek = pxMonth * 12 / 52;
+			pxMonth = TOOLS.monthPx();
 
 		order.forEach( id => {
 			const els = document.querySelectorAll( `[name="${id}"] .season` ),
@@ -21,10 +20,10 @@ UI.series = {
 			let w = 0, l = 0, m = 0;
 
 			els.forEach( ( el, i ) => {
-				const s = seasons[ i ];
+				const s = seasons[ i + 1 ];
 
 				m = TOOLS.monthsBetween( TS.start, s.firstAired );
-				w = pxWeek * s.episodes + "px";
+				w = pxMonth * TOOLS.monthsBetween( s.firstAired, s.lastAired ) + "px";
 				l = m * pxMonth + "px";
 				el.style.width = w;
 				el.style.left = l;
@@ -38,28 +37,24 @@ UI.series = {
 		STORE.set( "order", Array.from( this.shows.keys() ) );
 	},
 	_display() {
-		const order = STORE.get( "order" );
-
 		this.rootEl.innerHTML = "";
-		order.forEach( sId => {
-			this.shows.get( +sId ) && this._newElem( +sId );
-		});
+		STORE.get( "order" )
+			.forEach( id => { this._newElem( this.shows.get( +id ) ) } );
 	},
-	_newElem( sId ) {
-		const serie = this.shows.get( +sId ),
-			template = document.querySelector( "#serie" ),
-			el = template.content.children[ 0 ].cloneNode( true ),
-			elTitle = el.querySelector( ".title" );
+	_newElem( show ) {
+		const template = document.querySelector( "#serie" ),
+			elRoot = template.content.children[ 0 ].cloneNode( true ),
+			elTitle = elRoot.querySelector( ".title" );
 
-		serie.seasons.forEach( s => {
-			const elSeason = document.createElement( "div" );
+		Object.keys( show.seasons ).forEach( s => {
+			const el = document.createElement( "div" );
 
-			elSeason.style.borderColor = TS.colors.get( serie.title );
-			elSeason.classList.add( "season" );
-			el.prepend( elSeason );
+			el.style.borderColor = TS.colors.get( show.network );
+			el.classList.add( "season" );
+			elRoot.prepend( el );
 		});
-		el.setAttribute( "name", sId );
-		elTitle.innerHTML = serie.title;
-		this.rootEl.append( el );
+		elRoot.setAttribute( "name", show.id );
+		elTitle.innerHTML = show.title;
+		this.rootEl.append( elRoot );
 	},
 }

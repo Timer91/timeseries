@@ -1,9 +1,7 @@
 "use strict";
 
-let shows = null;
-
 TS.betaseries = {
-	init: function() {
+	init() {
 		this.API_KEY = "0ae925cd365a";
 		this.LOGIN = "Timeseries";
 		this.PASS = "6742334107ab742a1d675bf51f0b6ac9";
@@ -13,14 +11,13 @@ TS.betaseries = {
 		});
 
 		return this.connection()
-			.then( () => {
-				return this.getMemberShows()
-					.then( () => this.getShowEpisodes() )
-					.then( () => this.cleanShows() );
-			})
+			.then( () => this.getMemberShows() )
+			.then( () => this.getShowEpisodes() )
+			.then( () => this.cleanShows() );
 	},
 
-	connection: function() {
+	// store the return of connection request
+	connection() {
 		return fetch( `https://api.betaseries.com/members/auth
 			?login=${this.LOGIN}&password=${this.PASS}`, {
 				method: "POST",
@@ -29,7 +26,9 @@ TS.betaseries = {
 		.then( res => res.json() )
 		.then( res => STORE.set( "session", res ) );
 	},
-	getMemberShows: function() {
+
+	// store an object of shows => { {show}, ...}
+	getMemberShows() {
 		const s = STORE.get( "session" );
 
 		return fetch( `https://api.betaseries.com/shows/member?id=${s.user.id}`, {
@@ -39,7 +38,9 @@ TS.betaseries = {
 		.then( res => res.json() )
 		.then( res => STORE.set( "shows", res.shows ) );
 	},
-	getShowEpisodes: function() {
+	
+	// store a Map of shows' episodes => Map( [ [ show.id, [ {ep}, ...] ], ...] )
+	getShowEpisodes() {
 		const promises = [],
 			shows = STORE.get( "shows" ),
 			episodes = new Map();
@@ -56,27 +57,38 @@ TS.betaseries = {
 		return Promise.all( promises )
 			.then( () => STORE.set( "episodes", Array.from( episodes ) ) );
 	},
-	cleanShows: function() {
-		const oldShows = STORE.get( "shows" ),
-			episodes = new Map( STORE.get( "episodes" ) ),
-			shows = new Map();
-
-		oldShows.forEach( ( s, i ) => {
-			const sEps = episodes.get( +s.id ),
-				show = {
-					title: s.title,
-					network: s.network,
-					seasons: s.seasons_details
-				};
-
-			sEps.forEach( ( e, i ) => {
-				if ( e.episode === 1 ) {
-					show.seasons[ e.season - 1 ][ "firstAired" ] = e.date;
+	
+	// keep and format the necessary information about episodes
+	cleanEpisodes( eps ) {
+		return eps
+			.filter( ep => ep.special !== 1 )
+			.sort( ( a, b ) => a.global > b.global ? 1 : a.global < b.global ? -1 : 0 )
+			.reduce( ( seasons, ep ) => {
+				if ( ep.season in seasons ) {
+					seasons[ ep.season ].episodes.push( ep );
+					seasons[ ep.season ].lastAired = ep.date;
+				} else {
+					seasons[ ep.season ] = {
+						episodes : [ ep ],
+						firstAired: ep.date,
+						lastAired: "",
+					};
 				}
-			})
-			shows.set( s.id, show );
-		})
-		STORE.set( "shows", Array.from( shows ) );
+				return seasons;
+			}, {} );
+	},
+
+	// format data in a stored shows Map
+	cleanShows() {
+		const shows = STORE.get( "shows" ),
+			showsEps = STORE.get( "episodes" ),
+			data = showsEps.reduce( ( data, [ id, eps ] ) => {
+				data.set( id, this.cleanEpisodes( eps ) );
+				return data;
+			}, new Map() );
+
+		shows.forEach( ( s, i ) => s.seasons = data.get( +s.id ) );
+		STORE.set( "shows", Array.from( shows.map( s => [ s.id, s ] ) ) ); // save shows as Map()
 		STORE.remove( "episodes" );
 	},
 }
