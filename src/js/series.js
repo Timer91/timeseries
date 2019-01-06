@@ -45,19 +45,17 @@ UI.series = {
 		const template = document.getElementById( "show" ),
 			elRoot = template.content.children[ 0 ].cloneNode( true ),
 			elPoster = elRoot.querySelector( ".poster" ),
-			eltitle = elRoot.querySelector( ".title" ),
-			elImg = document.createElement( "img" );
+			eltitle = elRoot.querySelector( ".title" );
 
 		Object.keys( show.seasons ).forEach( s => {
 			const el = document.createElement( "div" );
 
 			el.style.borderColor = TS.colors.get( show.network );
 			el.classList.add( "season" );
-			elRoot.prepend( el );
+			elRoot.append( el );
 		});
-		elImg.src = show.images.poster;
-		elPoster.append( elImg );
-		eltitle.innerHTML = show.title
+		elPoster.style.backgroundImage = `url("${show.images.poster}")`;
+		eltitle.innerHTML = show.title;
 		elRoot.setAttribute( "name", show.id );
 		this.rootEl.append( elRoot );
 	},
