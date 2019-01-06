@@ -34,23 +34,28 @@
 	margin-top: var( --show-margin-top );
 }
 
+.drag,
 .poster,
-.drag {
+.title {
+	z-index: 1;
 	color: var( --poster-color );
 	background-color: var( --poster-bg-color );
 	transition: opacity .5s, color .5s, background-color .5s;
-	z-index: 1;
+	user-select: none;
 }
 
 .poster {
-	flex: 1;
-	order:1;
-	box-sizing: border-box;
-	user-select: none;
+	order: 1;
 }
 
 .poster img {
 	height: 100%;
+}
+
+.title {
+	flex: 1;
+	order: 2;
+	padding-left: 6px;
 }
 
 .show-opacity,
@@ -60,11 +65,13 @@
 }
 
 #timeline:hover .show:not(:hover) .drag,
+#timeline:hover .show:not(:hover) .title,
 #timeline.no-hover:hover .show:hover .drag {
 	color: var( --poster-bg-color );
 }
 
-#timeline:not(.no-hover) .show:hover .drag {
+#timeline:not(.no-hover) .show:hover .drag,
+#timeline:not(.no-hover) .show:hover .title {
 	background-color: rgba( 255, 255, 255, .18 );
 }
 #timeline:not(.no-hover) .show:hover .poster {

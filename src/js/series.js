@@ -44,7 +44,8 @@ UI.series = {
 	_newElem( show ) {
 		const template = document.getElementById( "show" ),
 			elRoot = template.content.children[ 0 ].cloneNode( true ),
-			elBan = elRoot.querySelector( ".poster" ),
+			elPoster = elRoot.querySelector( ".poster" ),
+			eltitle = elRoot.querySelector( ".title" ),
 			elImg = document.createElement( "img" );
 
 		Object.keys( show.seasons ).forEach( s => {
@@ -55,7 +56,8 @@ UI.series = {
 			elRoot.prepend( el );
 		});
 		elImg.src = show.images.poster;
-		elBan.append( elImg );
+		elPoster.append( elImg );
+		eltitle.innerHTML = show.title
 		elRoot.setAttribute( "name", show.id );
 		this.rootEl.append( elRoot );
 	},
