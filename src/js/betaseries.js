@@ -13,7 +13,7 @@ TS.betaseries = {
 		return this.connection()
 			.then( () => this.getMemberShows() )
 			.then( () => this.getShowEpisodes() )
-			.then( () => this.cleanShows() );
+			.then( () => this._cleanShows() );
 	},
 
 	// store the return of connection request
@@ -58,9 +58,23 @@ TS.betaseries = {
 		return Promise.all( promises )
 			.then( () => STORE.set( "episodes", Array.from( episodes ) ) );
 	},
-	
+
+	// format data in a stored shows Map
+	_cleanShows() {
+		const shows = STORE.get( "shows" ),
+			showsEps = STORE.get( "episodes" ),
+			data = showsEps.reduce( ( data, [ id, eps ] ) => {
+				data.set( id, this._cleanEpisodes( eps ) );
+				return data;
+			}, new Map() );
+
+		shows.forEach( ( s, i ) => s.seasons = data.get( +s.id ) );
+		STORE.set( "shows", Array.from( shows.map( s => [ s.id, s ] ) ) ); // save shows as Map()
+		STORE.remove( "episodes" );
+	},
+
 	// keep and format the necessary information about episodes
-	cleanEpisodes( eps ) {
+	_cleanEpisodes( eps ) {
 		return eps
 			.filter( ep => ep.special !== 1 )
 			.sort( ( a, b ) => a.global > b.global ? 1 : a.global < b.global ? -1 : 0 )
@@ -77,19 +91,5 @@ TS.betaseries = {
 				}
 				return seasons;
 			}, {} );
-	},
-
-	// format data in a stored shows Map
-	cleanShows() {
-		const shows = STORE.get( "shows" ),
-			showsEps = STORE.get( "episodes" ),
-			data = showsEps.reduce( ( data, [ id, eps ] ) => {
-				data.set( id, this.cleanEpisodes( eps ) );
-				return data;
-			}, new Map() );
-
-		shows.forEach( ( s, i ) => s.seasons = data.get( +s.id ) );
-		STORE.set( "shows", Array.from( shows.map( s => [ s.id, s ] ) ) ); // save shows as Map()
-		STORE.remove( "episodes" );
 	},
 }
