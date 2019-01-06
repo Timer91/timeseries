@@ -42,9 +42,10 @@ UI.series = {
 			.forEach( id => { this._newElem( this.shows.get( +id ) ) } );
 	},
 	_newElem( show ) {
-		const template = document.querySelector( "#serie" ),
+		const template = document.getElementById( "show" ),
 			elRoot = template.content.children[ 0 ].cloneNode( true ),
-			elTitle = elRoot.querySelector( ".title" );
+			elBan = elRoot.querySelector( ".poster" ),
+			elImg = document.createElement( "img" );
 
 		Object.keys( show.seasons ).forEach( s => {
 			const el = document.createElement( "div" );
@@ -53,8 +54,9 @@ UI.series = {
 			el.classList.add( "season" );
 			elRoot.prepend( el );
 		});
+		elImg.src = show.images.poster;
+		elBan.append( elImg );
 		elRoot.setAttribute( "name", show.id );
-		elTitle.innerHTML = show.title;
 		this.rootEl.append( elRoot );
 	},
 }

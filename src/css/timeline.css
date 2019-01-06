@@ -1,55 +1,73 @@
-#timelines {
+#timeline {
 	overflow: auto;
 	width: 100%;
-	margin: 20px;
-	border-radius: 4px;
+	max-height: 100%;
+	border-radius: var( --timeline-bd-radius );
 	background-color: var( --timeline-bg );
 }
 
-.serie {
+/* borders-radius */
+#timeline > div:first-child.show .poster {
+	border-top-right-radius: var( --timeline-bd-radius );
+}
+#timeline > div:last-child.show .poster {
+	border-bottom-right-radius: var( --timeline-bd-radius );
+}
+#timeline > div:first-child.show .drag {
+	border-top-left-radius: var( --timeline-bd-radius );
+}
+#timeline > div:last-child.show .drag {
+	border-bottom-left-radius: var( --timeline-bd-radius );
+}
+
+/* show */
+.show {
 	display: flex;
 	position: relative;
-	height: var( --serie-height );
+	height: var( --show-height );
 	box-sizing: border-box;
-	line-height: var( --serie-height );
+	line-height: var( --show-height );
 	transition: opacity .5s;
 }
 
-.serie-opacity {
-	opacity: var( --serie-opacity );
+.show + .show {
+	margin-top: var( --show-margin-top );
 }
 
-.serie + .serie {
-	margin-top: var( --serie-margin-top );
-}
-
-.title {
-	flex: 1;
-	order:1;
-	padding-left: var( --title-padding );
-	box-sizing: border-box;
-	cursor: default;
-}
-
-.title,
+.poster,
 .drag {
-	color: var( --title-color );
-	background-color: var( --title-bg-color );
-	transition: color .5s, background-color .5s;
+	color: var( --poster-color );
+	background-color: var( --poster-bg-color );
+	transition: opacity .5s, color .5s, background-color .5s;
 	z-index: 1;
 }
 
-#timelines:hover .serie:not(:hover) .title,
-#timelines:hover .serie:not(:hover) .drag,
-#timelines.no-hover:hover .serie:hover .title,
-#timelines.no-hover:hover .serie:hover .drag {
-	color: var( --title-bg-color );
+.poster {
+	flex: 1;
+	order:1;
+	box-sizing: border-box;
+	user-select: none;
 }
 
-#timelines:not(.no-hover) .serie:hover .drag {
+.poster img {
+	height: 100%;
+}
+
+.show-opacity,
+#timeline:hover .show:not(:hover) .poster,
+#timeline.no-hover:hover .show:hover .poster {
+	opacity: var( --show-opacity );
+}
+
+#timeline:hover .show:not(:hover) .drag,
+#timeline.no-hover:hover .show:hover .drag {
+	color: var( --poster-bg-color );
+}
+
+#timeline:not(.no-hover) .show:hover .drag {
 	background-color: rgba( 255, 255, 255, .18 );
 }
-#timelines:not(.no-hover) .serie:hover .title {
+#timeline:not(.no-hover) .show:hover .poster {
 	background-color: rgba( 255, 255, 255, .07 );
 }
 

@@ -2,14 +2,15 @@
 	--app-bg: hsla(211, 22%, 15%, 1);
 
 	--timeline-bg: #283440;
+	--timeline-bd-radius: 4px;
 
-	--serie-height: 40px;
-	--serie-opacity: .4;
-	--serie-margin-top: 1px;
+	--show-height: 40px;
+	--show-opacity: .4;
+	--show-margin-top: 1px;
 
-	--title-padding: 10px;
-	--title-color: #ddd;
-	--title-bg-color: rgba( 255, 255, 255, .12 );
+	--poster-padding: 10px;
+	--poster-color: #ddd;
+	--poster-bg-color: rgba( 255, 255, 255, .12 );
 
 	--season-bg-color: rgba(255, 255, 255, .18);
 	--season-bd: 7px solid;

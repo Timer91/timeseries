@@ -7,7 +7,7 @@ const TS = {
 };
 
 const UI = {
-	wrap: document.getElementById( "timelines" )
+	wrap: document.getElementById( "timeline" )
 }
 
 const STORE = {

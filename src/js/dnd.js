@@ -6,12 +6,12 @@ UI.dnd = {
 			handlers = el.getElementsByClassName( "drag" );
 
 		this.curDrag = null;
-		[].slice.call( el.children ).forEach( serie => {
-			serie.draggable = false;
-			serie.ondragstart = this._onDragStart.bind( this );
-			serie.ondragover = this._onDragOver.bind( this );
-			serie.ondragend = this._onDragEnd.bind( this );
-			serie.ondrop = this._onDrop.bind( this );
+		[].slice.call( el.children ).forEach( show => {
+			show.draggable = false;
+			show.ondragstart = this._onDragStart.bind( this );
+			show.ondragover = this._onDragOver.bind( this );
+			show.ondragend = this._onDragEnd.bind( this );
+			show.ondrop = this._onDrop.bind( this );
 		});
 		for ( let h of handlers ) {
 			h.onmousedown = this._onMouseDown.bind( this );
@@ -30,7 +30,7 @@ UI.dnd = {
 		this.curDrag = e.target;
 		e.dataTransfer.effectAllowed = "move";
 		e.dataTransfer.setData( "Text", this.curDrag.parentNode.textContent );
-		this.curDrag.classList.add( "serie-opacity" );
+		this.curDrag.classList.add( "show-opacity" );
 		UI.wrap.classList.add( "no-hover" );
 	},
 	_onDragOver: function( e ) {
@@ -38,7 +38,7 @@ UI.dnd = {
 
 		e.preventDefault();
 		e.dataTransfer.dropEffect = "move";
-		if ( t && t !== this.curDrag && t.classList.contains( "serie" ) ) {
+		if ( t && t !== this.curDrag && t.classList.contains( "show" ) ) {
 			const tBCR = t.getBoundingClientRect();
 
 			e.clientY < tBCR.top + tBCR.height / 2
@@ -49,7 +49,7 @@ UI.dnd = {
 	},
 	_onDragEnd: function( e ) {
 		this.curDrag.setAttribute( "draggable", "false" );
-		this.curDrag.classList.remove( "serie-opacity" );
+		this.curDrag.classList.remove( "show-opacity" );
 		UI.wrap.classList.remove( "no-hover" );
 	},
 	_onDrop: function( e ) {

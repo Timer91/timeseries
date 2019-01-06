@@ -13,9 +13,10 @@ body {
     height: 100%;
     align-items: center;
     margin: 0;
-    padding: 0;
+    padding: 20px;
     background-color: var( --app-bg );
     font-family: sans-serif;
+    box-sizing: border-box;
 }
 
 .icon {
