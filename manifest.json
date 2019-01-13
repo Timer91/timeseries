@@ -1,7 +1,19 @@
 {
-  "name": "Timeseries",
-  "short_name": "Timeseries",
-  "background_color": "#fff",
-  "theme_color": "#283440",
-  "description": "A timeline of release dates of TV series seasons from 2004 to ( now + 1 year )."
+	"name": "Timeseries",
+	"short_name": "Timeseries",
+	"background_color": "#fff",
+	"theme_color": "#283440",
+	"description": "A timeline of release dates of TV series seasons from 2004 to ( now + 1 year ).",
+	"icons": [
+		{
+			"src": "assets/favicon/android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "assets/favicon/android-chrome-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	]
 }
