@@ -24,6 +24,8 @@
 	transition: opacity, color, background-color;
 	transition-duration: var( --show-transition );
 	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
 }
 
 .poster {
