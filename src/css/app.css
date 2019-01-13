@@ -15,8 +15,9 @@ body {
     margin: 0;
     padding: 20px;
     background-color: var( --app-bg );
-    font-family: sans-serif;
+	font-family: 'Roboto Condensed', sans-serif;
     box-sizing: border-box;
+	font-size: 16px;
 }
 
 .icon {
