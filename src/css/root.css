@@ -1,18 +1,20 @@
 :root {
 	--app-bg: hsla(211, 22%, 15%, 1);
+	--app-transition: .1s;
 
 	--timeline-bg: #283440;
-	--timeline-bd-radius: 4px;
 
+	--show-color: #ddd;
+	--show-bg-color: rgba( 255, 255, 255, .1 );
 	--show-height: 40px;
 	--show-opacity: .4;
 	--show-margin-top: 1px;
+	--show-transition: .1s;
 
-	--poster-padding: 10px;
-	--poster-color: #ddd;
-	--poster-bg-color: rgba( 255, 255, 255, .12 );
+	--network-ftSize: .7em;
+	--network-color: #bbb;
 
-	--season-bg-color: rgba(255, 255, 255, .18);
+	--season-bg-color: rgba( 255, 255, 255, .18 );
 	--season-bd: 7px solid;
 	--season-bd-rad: 4px;
 }

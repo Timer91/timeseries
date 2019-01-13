@@ -41,11 +41,19 @@ UI.series = {
 		STORE.get( "order" )
 			.forEach( id => { this._newElem( this.shows.get( +id ) ) } );
 	},
+	_setNetwork( el, show ) {
+		const elIcon = el.querySelector( ".tag" ),
+			elName = el.querySelector( ".name" );
+
+		elIcon.style.color = TS.colors.get( show.network );
+		elName.innerHTML = show.network;
+	},
 	_newElem( show ) {
 		const template = document.getElementById( "show" ),
 			elRoot = template.content.children[ 0 ].cloneNode( true ),
 			elPoster = elRoot.querySelector( ".poster" ),
-			eltitle = elRoot.querySelector( ".title" );
+			elTitle = elRoot.querySelector( ".title" ),
+			elNetwork = elRoot.querySelector( ".network" );
 
 		Object.keys( show.seasons ).forEach( s => {
 			const el = document.createElement( "div" );
@@ -54,8 +62,9 @@ UI.series = {
 			el.classList.add( "season" );
 			elRoot.append( el );
 		});
+		this._setNetwork( elNetwork, show );
 		elPoster.style.backgroundImage = `url("${show.images.poster}")`;
-		eltitle.innerHTML = show.title;
+		elTitle.innerHTML = show.title;
 		elRoot.setAttribute( "name", show.id );
 		this.rootEl.append( elRoot );
 	},

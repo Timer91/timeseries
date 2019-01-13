@@ -17,13 +17,12 @@
 	margin-top: var( --show-margin-top );
 }
 
-.drag,
-.poster,
-.title {
+.show > div:not( .season ) {
 	z-index: 1;
-	color: var( --poster-color );
-	background-color: var( --poster-bg-color );
-	transition: opacity .5s, color .5s, background-color .5s;
+	color: var( --show-color );
+	background-color: var( --show-bg-color );
+	transition: opacity, color, background-color;
+	transition-duration: var( --show-transition );
 	user-select: none;
 }
 
@@ -34,8 +33,19 @@
 }
 
 .title {
+	padding: 0 6px;
+}
+
+.network {
+	display: flex;
 	flex: 1;
-	padding-left: 6px;
+	font-size: var( --network-ftSize );
+}
+
+.network .name {
+	flex: 1;
+	padding: 2px 0 0 2px;
+	color: var( --network-color );
 }
 
 .show-opacity,
@@ -45,15 +55,12 @@
 }
 
 #timeline:hover .show:not(:hover) .drag,
-#timeline:hover .show:not(:hover) .title,
 #timeline.no-hover:hover .show:hover .drag {
-	color: var( --poster-bg-color );
+	color: var( --show-bg-color );
 }
 
-#timeline:not(.no-hover) .show:hover .drag,
-#timeline:not(.no-hover) .show:hover .title,
-#timeline:not(.no-hover) .show:hover .poster {
-	background-color: rgba( 255, 255, 255, .18 );
+#timeline:not(.no-hover) .show:hover > div:not( .season ) {
+	background-color: var( --season-bg-color );
 }
 
 .season {
