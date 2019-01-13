@@ -1,17 +1,37 @@
 "use strict";
 
 UI.timeline = {
-	init: function() {
+	init() {
 		this._colors = {
 			now: "rgba( 255, 255, 255, .3 )",
 			year: "rgba( 0, 0, 0, .5 )",
 			month: "rgba( 0, 0, 0, .2 )"
 		};
 
+		this.scale();
 		this.render();
 	},
 
-	render: function() {
+	scale() {
+		const years = TS.end - TS.start;
+
+		for ( let y = 0 ; y <= years ; ++y ) {
+			const el = UI.scale.children[ y ]
+				||document.createElement( "span" ),
+				left = TOOLS.monthPx() * 12 * y,
+				fix = 26.7 / 2; // tmp
+
+			el.style.left = left -
+				( y > 0 ? ( y === years ? 2 * fix : fix ) : 0 ) + "px";
+			if ( UI.scale.children.length <= years ) {
+				el.classList.add( "scale-year" );
+				el.innerHTML = TS.start + y;
+				UI.scale.append( el );
+			}
+		}
+	},
+
+	render() {
 		const el = UI.wrap,
 			m1 = TOOLS.monthsBetween( TS.start, TS.end ),
 			m2 = TOOLS.monthsBetween( TS.start, TS.now ),

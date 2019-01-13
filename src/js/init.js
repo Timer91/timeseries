@@ -7,6 +7,7 @@ const TS = {
 };
 
 const UI = {
+	scale: document.getElementById( "scale" ),
 	wrap: document.getElementById( "timeline" )
 }
 

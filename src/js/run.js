@@ -7,6 +7,7 @@ UI.init = function() {
 };
 
 window.onresize = () => {
+	UI.timeline.scale();
 	UI.timeline.render();
 	UI.series.render();
 	return false;

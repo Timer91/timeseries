@@ -1,0 +1,20 @@
+#scale {
+	display: flex;
+	align-items: center;
+	position: relative;
+	height: 30px;
+	font-weight: bold;
+}
+
+.scale-year {
+	position: absolute;
+	color: #fff;
+	font-size: .8em;
+	transition: opacity .1s;
+}
+
+@media ( max-width: 740px ) {
+	.scale-year:nth-child( 2n ) {
+		opacity: 0;
+	}
+}
