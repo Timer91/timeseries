@@ -6,7 +6,7 @@ UI.init = function() {
 	UI.dnd.init();
 };
 
-UI.resize = () => {
+UI.resize = function() {
 	this.timeline.scale();
 	this.timeline.render();
 	this.series.render();
@@ -14,7 +14,7 @@ UI.resize = () => {
 }
 
 function run() {
-	window.resize = UI.resize.bind( UI );
+	window.onresize = UI.resize.bind( UI );
 
 	if ( STORE.has( "time" ) &&
 		!TOOLS.pastDay( STORE.get( "time" ) ) &&
