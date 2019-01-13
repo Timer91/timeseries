@@ -6,14 +6,16 @@ UI.init = function() {
 	UI.dnd.init();
 };
 
-window.onresize = () => {
-	UI.timeline.scale();
-	UI.timeline.render();
-	UI.series.render();
+UI.resize = () => {
+	this.timeline.scale();
+	this.timeline.render();
+	this.series.render();
 	return false;
 }
 
 function run() {
+	window.resize = UI.resize.bind( UI );
+
 	if ( STORE.has( "time" ) &&
 		!TOOLS.pastDay( STORE.get( "time" ) ) &&
 		STORE.has( "shows" ) ) {
@@ -23,4 +25,4 @@ function run() {
 	}
 }
 
-run();
+document.addEventListener( "DOMContentLoaded", run );
