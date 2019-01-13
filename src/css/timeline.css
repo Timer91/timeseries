@@ -48,21 +48,6 @@
 	color: var( --network-color );
 }
 
-.show-opacity,
-#timeline:hover .show:not(:hover) .poster,
-#timeline.no-hover:hover .show:hover .poster {
-	opacity: var( --show-opacity );
-}
-
-#timeline:hover .show:not(:hover) .drag,
-#timeline.no-hover:hover .show:hover .drag {
-	color: var( --show-bg-color );
-}
-
-#timeline:not(.no-hover) .show:hover > div:not( .season ) {
-	background-color: var( --season-bg-color );
-}
-
 .season {
 	position: absolute;
 	height: 100%;

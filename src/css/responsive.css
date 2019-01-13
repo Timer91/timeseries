@@ -1,0 +1,12 @@
+@media ( max-width: 740px ) {
+	.scale-year:nth-child( 2n ) {
+		opacity: 0;
+	}
+}
+
+@media ( max-width: 375px ) {
+	.scale-year:nth-child( 3 ),
+	.scale-year:nth-last-child( 3 ) {
+		opacity: 0;
+	}
+}
