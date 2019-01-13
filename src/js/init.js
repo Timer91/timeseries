@@ -50,9 +50,12 @@ TS.colors = new Map([
 	[ "AMC", "#e7e198" ],
 	[ "HBO", "#2cb0d8" ],
 	[ "FOX (US)", "#002486" ],
-	[ "Univision", "#42d07c" ],
-	[ "USA Network", "#400195" ],
+	[ "Hulu", "#72DE93" ],
+	[ "Univision", "#d800bb" ],
 	[ "Showtime", "#b00100" ],
+	[ "USA Network", "#4ecff8" ],
+	[ "NBC", "#49009b" ],
+	[ "Adult Swim", "#000" ]
 ]);
 
 window.TS = TS;
