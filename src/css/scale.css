@@ -1,8 +1,7 @@
 #scale {
 	display: flex;
-	align-items: center;
 	position: relative;
-	height: 30px;
+	height: 20px;
 	font-weight: bold;
 }
 
